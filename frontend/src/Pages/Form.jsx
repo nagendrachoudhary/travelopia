@@ -6,7 +6,6 @@ import Form_input from "../components/Form_input";
 function Form(props) {
   return (
     <Box >
-      <Form_top/>
       <Form_input/>
     </Box>
   );

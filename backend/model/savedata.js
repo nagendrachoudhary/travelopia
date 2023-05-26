@@ -5,7 +5,8 @@ const dataschema = new Schema ({
     email:{type:String,required:true},
     country:{type:String,required:true},
     travellers:{type:Number,required:true},
-    budget:{type:Number,required:true}
+    budget:{type:Number,required:true},
+    total:{type:Number,required:true}
 },{
     timestamps:true
 })

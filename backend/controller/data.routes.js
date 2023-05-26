@@ -14,6 +14,16 @@ router.post('/', async(req, res) => {
     
 })
 router.get('/', async(req, res) => {
-    res.send("done")
+    try{
+        const {page} = req.query
+        const body =  await data.find().limit(5).skip((page-1)*5)
+        let totalPage =await data.find().count()
+        totalPage=(Math.ceil(totalPage/5));
+        res.send({body,totalPage,page})
+
+    }catch(error){
+        console.log(error);
+        res.status(500).send(error);
+    }
 })
 module.exports =router
