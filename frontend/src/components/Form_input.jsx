@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
+import { SendData } from "../Api/Api";
 function Form_input(props) {
     const [form ,setform] = useState({country:"",travellers:1,budget:0});
     const [total,settotal]= useState(0)
@@ -39,10 +40,12 @@ function Form_input(props) {
     }
     const handlesubmit = ()=>{
             handleOpen()
-            console.log(form)
-            setTimeout(() => {
-                handleClose()
-            }, 1000);
+           SendData(form).then((res)=>{
+             handleClose()
+             alert("done")
+            }).catch((err)=>{
+              console.log(err);
+           })
     }
   return (
       <form action="submit" onSubmit={handlesubmit}>
