@@ -15,11 +15,28 @@ router.post('/', async(req, res) => {
 })
 router.get('/', async(req, res) => {
     try{
-        const {page} = req.query
-        const body =  await data.find().limit(5).skip((page-1)*5)
-        let totalPage =await data.find().count()
-        totalPage=(Math.ceil(totalPage/5));
-        res.send({body,totalPage,page})
+        const {sort}=req.query
+        if(sort=='all'){
+            const {page} = req.query
+            const body =  await data.find().limit(5).skip((page-1)*5)
+            let totalPage =await data.find().count()
+            totalPage=(Math.ceil(totalPage/5));
+            res.send({body,totalPage,page})
+        }
+        else if(sort=='budget'){
+            const {page} = req.query
+            const body =  await data.find().limit(5).skip((page-1)*5).sort({[sort]:-1})
+            let totalPage =await data.find().count()
+            totalPage=(Math.ceil(totalPage/5));
+            res.send({body,totalPage,page})
+        }
+        else{
+            const {page} = req.query
+            const body =  await data.find().limit(5).skip((page-1)*5).sort({[sort]:1})
+            let totalPage =await data.find().count()
+            totalPage=(Math.ceil(totalPage/5));
+            res.send({body,totalPage,page})
+        }
 
     }catch(error){
         console.log(error);

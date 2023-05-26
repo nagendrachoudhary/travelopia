@@ -1,4 +1,6 @@
 import {
+  Alert,
+  AlertTitle,
   Backdrop,
   Box,
   Button,
@@ -30,6 +32,7 @@ function Form_input(props) {
     setOpen(true);
   };
   const handlechange = (e) => {
+    
     setform({ ...form, [e.target.name]: e.target.value });
     if (e.target.name == "budget") {
       settotal(e.target.value * form.travellers);
@@ -44,9 +47,10 @@ function Form_input(props) {
     SendData(form)
       .then((res) => {
         handleClose();
-        alert("done");
+        alert("form created")
       })
       .catch((err) => {
+        alert("Error")
         console.log(err);
       });
   };
