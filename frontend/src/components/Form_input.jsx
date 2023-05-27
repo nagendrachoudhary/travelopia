@@ -46,18 +46,24 @@ function Form_input(props) {
     handleOpen();
     SendData(form)
       .then((res) => {
-        handleClose();
+        setTimeout(() => {
+          handleClose()
+        }, 500);
         alert("form created")
       })
       .catch((err) => {
+        setTimeout(() => {
+          handleClose()
+        }, 500);
         alert("Error")
-        handleClose();
         console.log(err);
       });
+      
   };
   return (
-    <form action="submit" onSubmit={handlesubmit}>
+    <form action="submit" test_id='Form'  onSubmit={handlesubmit}>
       <Box
+      
         display={"flex"}
         margin={"auto"}
         gap={"30px"}
@@ -65,8 +71,9 @@ function Form_input(props) {
         maxWidth={"500px"}
         width={["100vw", "50vw"]}>
         {open && (
-          <Box position={"absolute"}>
+          <Box  position={"absolute"}>
             <Backdrop
+            test_id='loading'
               sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
               open={open}>
               <CircularProgress color="inherit" />
@@ -74,6 +81,8 @@ function Form_input(props) {
           </Box>
         )}
         <TextField
+          test_inputid='name'
+          test_id='input'
           id="filled-basic"
           label="Name"
           placeholder="Enter Your Name"
@@ -84,6 +93,8 @@ function Form_input(props) {
           }}
         />
         <TextField
+          test_id='input'
+          test_inputid='email'
           id="filled-basic"
           label="Email"
           placeholder="Enter Your Email"
@@ -93,11 +104,12 @@ function Form_input(props) {
             handlechange(e);
           }}
         />
-        <FormControl>
+        <FormControl test_id='input'>
           <InputLabel id="demo-simple-select-label">
             Where do you want to go
           </InputLabel>
           <Select
+            test_inputid='country'
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={form.country ? form.country : "Select Country"}
@@ -106,15 +118,17 @@ function Form_input(props) {
             onChange={(e) => {
               handlechange(e);
             }}>
-            <MenuItem value={"India"}>India</MenuItem>
-            <MenuItem value={"Africa"}>Africa</MenuItem>
-            <MenuItem value={"Europe"}>Europe</MenuItem>
+            <MenuItem test_inputid='india' value={"India"}>India</MenuItem>
+            <MenuItem test_inputid='countrys' value={"Africa"}>Africa</MenuItem>
+            <MenuItem test_inputid='countrys' value={"Europe"}>Europe</MenuItem>
           </Select>
         </FormControl>
 
         <TextField
+        test_id='input'
+        test_inputid='travellers'
           id="outlined-number"
-          label="No. of travellers "
+          label="No. of C "
           type="number"
           value={form.travellers < 0 ? 0 : form.travellers}
           name="travellers"
@@ -127,9 +141,10 @@ function Form_input(props) {
           }}
         />
 
-        <FormControl>
+        <FormControl test_id='input'>
           <InputLabel htmlFor="outlined-adornment-amount">Budget</InputLabel>
           <OutlinedInput
+          test_inputid='budget'
             id="outlined-adornment-amount"
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
             label="budget"
@@ -140,11 +155,11 @@ function Form_input(props) {
           />
         </FormControl>
         <Box display={"flex"}  justifyContent={"space-around"}>
-          <Box border={"Window"} display={"flex"}>
+          <Box test_id='total' border={"Window"} display={"flex"}>
             <Box>Total:-</Box>
             {total}
           </Box>
-          <Button variant='outlined' type="submit">Submit</Button>
+          <Button test_id='submit' variant='outlined' type="submit">Submit</Button>
         </Box>
       </Box>
     </form>

@@ -1,5 +1,66 @@
-{
-  "name": "Using fixtures to represent data",
-  "email": "hello@cypress.io",
-  "body": "Fixtures are a great way to mock data for responses to routes"
+{"data":{
+  "body": [
+  {
+  "_id": "6471168845271b9224d5d802",
+  "name": "nagendradangi105@gmail.com",
+  "email": "nagendradangi105@gmail.com",
+  "country": "Africa",
+  "travellers": 1,
+  "budget": 10,
+  "total": 10,
+  "createdAt": "2023-05-26T20:28:56.546Z",
+  "updatedAt": "2023-05-26T20:28:56.546Z",
+  "__v": 0
+  },
+  {
+  "_id": "6471168a45271b9224d5d804",
+  "name": "nagendradangi105@gmail.com",
+  "email": "nagendradangi105@gmail.com",
+  "country": "Africa",
+  "travellers": 1,
+  "budget": 10,
+  "total": 10,
+  "createdAt": "2023-05-26T20:28:58.158Z",
+  "updatedAt": "2023-05-26T20:28:58.158Z",
+  "__v": 0
+  },
+  {
+  "_id": "6471168345271b9224d5d7fe",
+  "name": "nagendradangi105@gmail.com",
+  "email": "nagendradangi105@gmail.com",
+  "country": "Africa",
+  "travellers": 1,
+  "budget": 10,
+  "total": 10,
+  "createdAt": "2023-05-26T20:28:51.784Z",
+  "updatedAt": "2023-05-26T20:28:51.784Z",
+  "__v": 0
+  },
+  {
+  "_id": "64710fb5c0cc4ddc9abc9076",
+  "name": "nagendradangi105@gmail.com",
+  "email": "nagendradangi105@gmail.com",
+  "country": "Europe",
+  "travellers": 1,
+  "budget": 100,
+  "total": 100,
+  "createdAt": "2023-05-26T19:59:49.555Z",
+  "updatedAt": "2023-05-26T19:59:49.555Z",
+  "__v": 0
+  },
+  {
+  "_id": "6471168645271b9224d5d800",
+  "name": "nagendradangi105@gmail.com",
+  "email": "nagendradangi105@gmail.com",
+  "country": "Africa",
+  "travellers": 1,
+  "budget": 10,
+  "total": 10,
+  "createdAt": "2023-05-26T20:28:54.688Z",
+  "updatedAt": "2023-05-26T20:28:54.688Z",
+  "__v": 0
+  }
+  ],
+  "totalPage": 4
+  }
 }

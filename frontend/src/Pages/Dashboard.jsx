@@ -29,6 +29,7 @@ function Dashboard(props) {
     GetData(page, sort)
       .then((res) => {
         setOpen(false);
+        console.log(res.data);
         setpage(res.data.page);
         setdata(res.data.body);
         settotal(res.data.totalPage);
@@ -45,10 +46,11 @@ function Dashboard(props) {
     setsort(e.target.value);
   };
   return (
-    <div>
+    <div test_id='dashboard_page'>
       {open && (
         <Box position={"absolute"}>
           <Backdrop
+          test_id='loading'
             sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
             open={open}>
             <CircularProgress color="inherit" />
@@ -57,6 +59,7 @@ function Dashboard(props) {
       )}
       <Box display={"flex"} justifyContent={"space-between"}>
         <Button
+          test_id='prv'
           disabled={page <= 1}
           onClick={() => {
             handlepageChange(+page - 1);
@@ -67,6 +70,7 @@ function Dashboard(props) {
         <FormControl style={{ width: "200px" }}>
           <InputLabel id="demo-simple-select-label">Sort </InputLabel>
           <Select
+             test_id='sort'
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={sort}
@@ -81,6 +85,7 @@ function Dashboard(props) {
           </Select>
         </FormControl>
         <Button
+         test_id='next'
           disabled={page == +total}
           onClick={() => {
             handlepageChange(+page + 1);
@@ -107,6 +112,7 @@ function Dashboard(props) {
               var d = row.createdAt.split("T");
               return (
                 <TableRow
+                  test_id='list'
                   key={i}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                   <TableCell align="right">{row.name}</TableCell>
