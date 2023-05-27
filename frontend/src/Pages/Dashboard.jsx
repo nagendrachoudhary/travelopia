@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GetData } from "../Api/Api";
+import jsPDF from 'jspdf'
 import {
   Backdrop,
   Box,
@@ -22,28 +23,27 @@ function Dashboard(props) {
   const [total, settotal] = useState(0);
   const [page, setpage] = useState(1);
   const [open, setOpen] = React.useState(false);
-  const [sort,setsort]= useState("")
+  const [sort, setsort] = useState("all");
   useEffect(() => {
     setOpen(true);
-    GetData(page,sort)
+    GetData(page, sort)
       .then((res) => {
-        console.log(res.data);
+        setOpen(false);
         setpage(res.data.page);
         setdata(res.data.body);
         settotal(res.data.totalPage);
-        setOpen(false);
       })
       .catch((err) => {
         setOpen(false);
         console.log(err);
       });
-  }, [page,sort]);
+  }, [page, sort]);
   const handlepageChange = (change) => {
     setpage(change);
   };
-  const handleChange=(e)=>{
-    setsort(e.target.value)
-  }
+  const handleChange = (e) => {
+    setsort(e.target.value);
+  };
   return (
     <div>
       {open && (
@@ -64,21 +64,20 @@ function Dashboard(props) {
           variant="contained">
           Prv
         </Button>
-        <FormControl style={{width:'200px'}}>
+        <FormControl style={{ width: "200px" }}>
           <InputLabel id="demo-simple-select-label">Sort </InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={sort}
-            
             label="All data Sorting"
             defaultValue="all"
             onChange={handleChange}>
-            <MenuItem value={'all'}>All</MenuItem>
-            <MenuItem value={'name'}>sort by name</MenuItem>
-            <MenuItem value={'date'}>sort by date</MenuItem>
-            <MenuItem value={'budget'}>sort by budget</MenuItem>
-            <MenuItem value={'country'}>Country</MenuItem>
+            <MenuItem value={"all"}>All</MenuItem>
+            <MenuItem value={"name"}>sort by name</MenuItem>
+            <MenuItem value={"date"}>sort by date</MenuItem>
+            <MenuItem value={"budget"}>sort by budget</MenuItem>
+            <MenuItem value={"country"}>Country</MenuItem>
           </Select>
         </FormControl>
         <Button
@@ -90,7 +89,7 @@ function Dashboard(props) {
           Next
         </Button>
       </Box>
-      <TableContainer>
+      <TableContainer id="dvTable">
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -123,6 +122,33 @@ function Dashboard(props) {
           </TableBody>
         </Table>
       </TableContainer>
+      <Button
+        variant="contained"
+        onClick={() => {
+          var doc = new jsPDF(
+            
+            {
+                orientation: "landscape"
+            }
+          );
+          data.forEach(function (data, i) {
+              doc.text(
+                  1000,
+                  100 + i * 100,
+                "Name: " +
+                data.name +
+                "Country: " +
+                data.country +
+                "Travellers: " +
+                data.travellers +
+                "Budget: " +
+                data.budget 
+            );
+          });
+          doc.save(".pdf");
+        }}>
+        Download
+      </Button>
     </div>
   );
 }

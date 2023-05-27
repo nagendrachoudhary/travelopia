@@ -30,6 +30,13 @@ router.get('/', async(req, res) => {
             totalPage=(Math.ceil(totalPage/5));
             res.send({body,totalPage,page})
         }
+        else if(sort=='date'){
+            const {page} = req.query
+            const body =  await data.find().limit(5).skip((page-1)*5).sort({createdAt:-1})
+            let totalPage =await data.find().count()
+            totalPage=(Math.ceil(totalPage/5));
+            res.send({body,totalPage,page})
+        }
         else{
             const {page} = req.query
             const body =  await data.find().limit(5).skip((page-1)*5).sort({[sort]:1})

@@ -51,6 +51,7 @@ function Form_input(props) {
       })
       .catch((err) => {
         alert("Error")
+        handleClose();
         console.log(err);
       });
   };
@@ -138,12 +139,12 @@ function Form_input(props) {
             }}
           />
         </FormControl>
-        <Box display={"flex"} justifyContent={"space-around"}>
+        <Box display={"flex"}  justifyContent={"space-around"}>
           <Box border={"Window"} display={"flex"}>
             <Box>Total:-</Box>
             {total}
           </Box>
-          <Button type="submit">Submit</Button>
+          <Button variant='outlined' type="submit">Submit</Button>
         </Box>
       </Box>
     </form>
