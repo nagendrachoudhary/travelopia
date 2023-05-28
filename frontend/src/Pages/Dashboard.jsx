@@ -23,22 +23,20 @@ function Dashboard(props) {
   const [data, setdata] = useState([]);
   const [total, settotal] = useState(0);
   const [page, setpage] = useState(1);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const [sort, setsort] = useState("all");
   
   useEffect(() => {
     setOpen(true);
-    GetData(page, sort)
+    GetData(page,sort)
       .then((res) => {
         setOpen(false);
-        console.log(res.data);
-        setpage(res.data.page);
         setdata(res.data.body);
+        setpage(res.data.page);
         settotal(res.data.totalPage);
       })
       .catch((err) => {
         setOpen(false);
-        console.log(err);
       });
   }, [page, sort]);
   const handlepageChange = (change) => {

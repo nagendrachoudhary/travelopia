@@ -73,9 +73,10 @@ function Form_input(props) {
   return (
     <form action="submit" test_id='Form'  onSubmit={handlesubmit}>
       <Box
-      
+        sx={{ boxShadow: 10 }}
         display={"flex"}
-        margin={"auto"}
+        padding={'30px'}
+        margin={'auto'}
         gap={"30px"}
         flexDirection={"column"}
         maxWidth={"500px"}
@@ -161,17 +162,23 @@ function Form_input(props) {
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
             label="budget"
             name="budget"
+            type="number"
             onChange={(e) => {
               handlechange(e);
             }}
           />
         </FormControl>
-        <Box display={"flex"}  justifyContent={"space-around"}>
-          <Box test_id='total' border={"Window"} display={"flex"}>
+        <Box display={"flex"}   justifyContent={"space-around"}>
+          <Box test_id='total' display={"flex"}>
             <Box>Total:-</Box>
             {total}
           </Box>
-          <Button disabled={submit} test_id='submit' variant='outlined' type="submit">Submit</Button>
+          <Button disabled={submit}  sx={{
+        ":hover": {
+          bgcolor: "black",
+          color: "white"
+        }
+      }} test_id='submit' variant='outlined' type="submit">Submit</Button>
         </Box>
       </Box>
     </form>
