@@ -49,7 +49,7 @@ function Dashboard(props) {
     setsort(e.target.value);
   };
   return (
-    <div test_id='dashboard_page'>
+    <Box   test_id='dashboard_page'>
       {open && (
         <Box position={"absolute"}>
           <Backdrop
@@ -61,8 +61,6 @@ function Dashboard(props) {
         </Box>
       )}
       <Box display={"flex"} justifyContent={"space-between"}>
-        
-        
         <FormControl style={{ width: "200px" }}>
           <InputLabel id="demo-simple-select-label">Sort </InputLabel>
           <Select
@@ -159,7 +157,7 @@ function Dashboard(props) {
           Next
         </Button>
             </Box>
-    </div>
+    </Box>
   );
 }
 
