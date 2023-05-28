@@ -26,7 +26,7 @@ describe('travelopia app testing', () => {
     cy.get('[test_id=submit]').should('be.visible')
   })
   it('Add data in inputBox',()=>{
-    cy.intercept('POST','http://localhost:8080',{'value':{'name':'nagendra','email':'nagendra@gamil.com','country':'india','travellers':'5','budget':'2000','total':'30000'}}).as('postrequest')
+    cy.intercept('POST','https://travelopia-btyp.onrender.com',{'value':{'name':'nagendra','email':'nagendra@gamil.com','country':'india','travellers':'5','budget':'2000','total':'30000'}}).as('postrequest')
     cy.visit('http://localhost:3000')
     cy.get('[test_inputid=name]').type('nagendra')
     cy.get('[test_inputid=email]').type('nagendra@gamil.com')

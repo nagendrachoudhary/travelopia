@@ -17,6 +17,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import Pagenation from "../components/Pagenation";
 
 function Dashboard(props) {
   const [data, setdata] = useState([]);
@@ -24,6 +25,7 @@ function Dashboard(props) {
   const [page, setpage] = useState(1);
   const [open, setOpen] = React.useState(false);
   const [sort, setsort] = useState("all");
+  
   useEffect(() => {
     setOpen(true);
     GetData(page, sort)
@@ -43,6 +45,7 @@ function Dashboard(props) {
     setpage(change);
   };
   const handleChange = (e) => {
+    setpage(1);
     setsort(e.target.value);
   };
   return (
@@ -58,15 +61,8 @@ function Dashboard(props) {
         </Box>
       )}
       <Box display={"flex"} justifyContent={"space-between"}>
-        <Button
-          test_id='prv'
-          disabled={page <= 1}
-          onClick={() => {
-            handlepageChange(+page - 1);
-          }}
-          variant="contained">
-          Prv
-        </Button>
+        
+        
         <FormControl style={{ width: "200px" }}>
           <InputLabel id="demo-simple-select-label">Sort </InputLabel>
           <Select
@@ -85,14 +81,27 @@ function Dashboard(props) {
           </Select>
         </FormControl>
         <Button
-         test_id='next'
-          disabled={page == +total}
-          onClick={() => {
-            handlepageChange(+page + 1);
-          }}
-          variant="contained">
-          Next
-        </Button>
+        variant="contained"
+        onClick={() => {
+          var doc = new jsPDF();
+          data.forEach(function (data, i) {
+              doc.text(
+                  10,
+                  10 + i * 10,
+                "Name: " +
+                data.name +
+                "Country: " +
+                data.country +
+                "Travellers: " +
+                data.travellers +
+                "Budget: " +
+                data.budget 
+            );
+          });
+          doc.save(".pdf");
+        }}>
+        Download
+      </Button>
       </Box>
       <TableContainer id="dvTable">
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -128,33 +137,28 @@ function Dashboard(props) {
           </TableBody>
         </Table>
       </TableContainer>
+      <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
+
       <Button
-        variant="contained"
-        onClick={() => {
-          var doc = new jsPDF(
-            
-            {
-                orientation: "landscape"
-            }
-          );
-          data.forEach(function (data, i) {
-              doc.text(
-                  1000,
-                  100 + i * 100,
-                "Name: " +
-                data.name +
-                "Country: " +
-                data.country +
-                "Travellers: " +
-                data.travellers +
-                "Budget: " +
-                data.budget 
-            );
-          });
-          doc.save(".pdf");
-        }}>
-        Download
-      </Button>
+          test_id='prv'
+          disabled={page <= 1}
+          onClick={() => {
+            handlepageChange(+page - 1);
+          }}
+          variant="contained">
+          Prv
+        </Button>
+      <Pagenation curr={page} total={total} handlepageChange={handlepageChange}/>
+      <Button
+         test_id='next'
+         disabled={page == +total}
+         onClick={() => {
+           handlepageChange(+page + 1);
+          }}
+          variant="contained">
+          Next
+        </Button>
+            </Box>
     </div>
   );
 }

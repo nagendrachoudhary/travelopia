@@ -17,28 +17,37 @@ import {
   SpeedDialAction,
   TextField,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { SendData } from "../Api/Api";
 function Form_input(props) {
-  const [form, setform] = useState({ country: "", travellers: 1, budget: 0 });
+  const [form, setform] = useState({name:'',email:'', country: "", travellers: 1, budget: 0 });
   const [total, settotal] = useState(0);
   const [Loading, setLoading] = useState(false);
   const [open, setOpen] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  const [submit,setsubmit]=useState(true)
   const handlechange = (e) => {
-    
     setform({ ...form, [e.target.name]: e.target.value });
     if (e.target.name == "budget") {
       settotal(e.target.value * form.travellers);
     } else if (e.target.name == "travellers") {
       settotal(e.target.value * form.budget);
     }
+  };
+  useEffect(() => {
+    if(form.name&&form.email&&form.country&&form.travellers&&form.budget){
+      setsubmit(false)
+    }
+    else{
+      setsubmit(true)
+    }
+  }, [handlechange])
+  const handleClose = () => {
+    setOpen(false);
+  };
+  
+  const handleOpen = () => {
+    setOpen(true);
   };
   const handlesubmit = (event) => {
     event.preventDefault()
@@ -49,8 +58,9 @@ function Form_input(props) {
         setTimeout(() => {
           handleClose()
         }, 500);
-        alert("form created")
-      })
+        alert("EVENT ADDED")
+       
+        })
       .catch((err) => {
         setTimeout(() => {
           handleClose()
@@ -112,9 +122,10 @@ function Form_input(props) {
             test_inputid='country'
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={form.country ? form.country : "Select Country"}
+            value={form.country}
             label="Country"
             name="country"
+            placeholder="Country"
             onChange={(e) => {
               handlechange(e);
             }}>
@@ -128,8 +139,9 @@ function Form_input(props) {
         test_id='input'
         test_inputid='travellers'
           id="outlined-number"
-          label="No. of C "
+          label="No. of travellers"
           type="number"
+          placeholder="No. of travellers"
           value={form.travellers < 0 ? 0 : form.travellers}
           name="travellers"
           onChange={(e) => {
@@ -159,7 +171,7 @@ function Form_input(props) {
             <Box>Total:-</Box>
             {total}
           </Box>
-          <Button test_id='submit' variant='outlined' type="submit">Submit</Button>
+          <Button disabled={submit} test_id='submit' variant='outlined' type="submit">Submit</Button>
         </Box>
       </Box>
     </form>
